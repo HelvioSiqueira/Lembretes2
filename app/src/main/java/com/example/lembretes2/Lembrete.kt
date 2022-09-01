@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 data class Lembrete(
-    var id: Int = 0,
-    var position: Int = 0,
+    var id: Long = 0L,
+    var position: Long = 0L,
     var titulo: String = "",
     var texto: String = "",
     var prioridade: String = "",

@@ -1,19 +1,26 @@
-package com.example.lembretes2
+package com.example.lembretes2.lista
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.lembretes2.BaseFragment
+import com.example.lembretes2.LembreteAdapter
 import com.example.lembretes2.databinding.ListLembretesFragmentBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
 
+    //Está dando erro quando executa, tentar configurar o koin
+
+    private val viewModel: ListLembretesViewModel by viewModel()
     private val lembreteAdapter by lazy { LembreteAdapter(requireContext()) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.salvar()
         setupRecycleView()
     }
 
@@ -32,7 +39,9 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
 
 
     companion object{
+        const val TAG_LISTA = "tagLista"
 
+        fun newInstance() = ListLembretesFragment()
     }
 }
 
