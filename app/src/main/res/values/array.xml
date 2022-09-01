@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="icones">
+
+        <item>@drawable/ic_atencao</item>
+        <item>@drawable/ic_update</item>
+        <item>@drawable/ic_snooze</item>
+        <item>@drawable/ic_pin</item>
+
+    </array>
+</resources>

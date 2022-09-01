@@ -1,3 +1,49 @@
 <resources>
-    <string name="app_name">Lembretes2</string>
+    <string name="app_name">Lembretes</string>
+
+    <string name="descricao">Icone do lembrete</string>
+    <string name="descricao_btn">Botão pra adiconar lembrete</string>
+
+    <string name="text_add">Adicionar Lembrete</string>
+
+    <string name="hint_title">Título</string>
+    <string name="hint_text">Texto</string>
+
+    <string name="descricao_btn_seta">Botão para expandir lembrete</string>
+
+    <string name="action_search">Pesquisar lembrete</string>
+    <string name="action_info">Info</string>
+    <string name="action_config">Configurar</string>
+
+    <string name="about_title">Dominando o Android</string>
+    <string name="about_message">Desenvolvido por Helvio</string>
+    <string name="about_button_site">Site</string>
+
+    <string name="error_invalid_lembrete">Lembrete não preenchido corretamente</string>
+    <string name="error_lembrete_add">Não foi possivel adicionar</string>
+
+    <string name="message_lembrete_deleted">Lembrete Excluido</string>
+    <string name="undo">Desfazer</string>
+
+    <string name="title_tamanho_letras">Tamanho da fonte</string>
+    <string name="pref_tamanho_letras">tamanho_letras</string>
+    <string name="tamanho_default">Normal</string>
+
+    <string-array name="tamanhos">
+        <item>Grande</item>
+        <item>Normal</item>
+        <item>Pequeno</item>
+
+    </string-array>
+
+    <string-array name="tamanho_values">
+        <item>30</item>
+        <item>20</item>
+        <item>15</item>
+
+    </string-array>
+
+    <string name="title_cor_urgente">Mudar cor da prioridade urgente</string>
+
+    <string name="title_cat1">Cat 1</string>
 </resources>
