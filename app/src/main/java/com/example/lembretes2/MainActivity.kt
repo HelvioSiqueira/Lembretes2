@@ -2,14 +2,27 @@ package com.example.lembretes2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.lembretes2.adicionar.LembreteFormFragment
+import com.example.lembretes2.databinding.ActivityMainBinding
 import com.example.lembretes2.lista.ListLembretesFragment
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
 
         showListFragment()
+
+        binding.fabAdd.setOnClickListener {
+            LembreteFormFragment.newInstance().open(supportFragmentManager)
+        }
+
     }
 
     private fun showListFragment(){

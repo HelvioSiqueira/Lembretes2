@@ -7,7 +7,9 @@ object MemoryRepository : LembreteRepository {
     private val lembretesList = mutableListOf<Lembrete>()
 
     init {
-        save(Lembrete(0, 0, "Testando", "Mais teste", "Urgente", ""))
+        save(Lembrete(0, 0, "Testando1", "Mais teste", "Urgente", ""))
+        save(Lembrete(0, 0, "Testando2", "Mais teste", "Urgente", ""))
+        save(Lembrete(0, 0, "Testando2", "Mais teste", "Importante", ""))
     }
 
     override fun save(lembrete: Lembrete) {
@@ -16,5 +18,14 @@ object MemoryRepository : LembreteRepository {
             lembrete.id = nextId++
             lembretesList.add(lembrete)
         }
+    }
+
+    override fun search(term: String, callback: (List<Lembrete>) -> Unit) {
+        callback(
+            if(term.isEmpty()) lembretesList
+        else lembretesList.filter {
+            it.titulo.uppercase().contains(term.uppercase())
+            }
+        )
     }
 }

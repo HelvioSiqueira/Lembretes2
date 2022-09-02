@@ -42,7 +42,6 @@ class LembreteAdapter(ctx: Context) : RecyclerView.Adapter<LembreteAdapter.VH>()
                     oldItem.prioridade == newItem.prioridade &&
                     oldItem.data == newItem.data
         }
-
     }
 
     private val differ = AsyncListDiffer(this, differCallback)
