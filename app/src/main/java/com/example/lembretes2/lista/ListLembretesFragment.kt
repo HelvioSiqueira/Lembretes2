@@ -7,15 +7,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lembretes2.BaseFragment
 import com.example.lembretes2.Lembrete
-import com.example.lembretes2.LembreteAdapter
+import com.example.lembretes2.adapter.LembreteAdapter
 import com.example.lembretes2.databinding.ListLembretesFragmentBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.example.lembretes2.repository.LembreteRepository
+import com.example.lembretes2.repository.MemoryRepository
 
 class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
 
     //Está dando erro quando executa, tentar configurar o koin
 
-    private val viewModel: ListLembretesViewModel by viewModel()
+    private val repository = ListLembretesViewModel(MemoryRepository)
     private val lembreteAdapter by lazy { LembreteAdapter(requireContext()) }
 
     val lembretes = mutableListOf<Lembrete>()
@@ -23,7 +24,7 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.salvar()
+        repository.salvar()
         setupRecycleView()
 
         lembretes.add(Lembrete(0, 0, "Testando", "Mais teste", "Urgente", ""))

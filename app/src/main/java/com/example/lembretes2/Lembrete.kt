@@ -18,7 +18,7 @@ data class Lembrete(
     private fun obterData(): String {
         val date = Calendar.getInstance().time
 
-        val dateTimeFormat = SimpleDateFormat("dd/mm/yyyy", Locale.getDefault())
+        val dateTimeFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
         return dateTimeFormat.format(date).toString()
     }

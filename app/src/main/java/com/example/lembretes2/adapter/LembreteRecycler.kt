@@ -86,6 +86,7 @@ class LembreteAdapter(ctx: Context) : RecyclerView.Adapter<LembreteAdapter.VH>()
             txtTitulo.text = lembrete.titulo
             txtTexto.text = lembrete.texto
             icone.setImageDrawable(icones.getDrawable(numPrioridade(lembrete.prioridade)))
+            dataAdd.text = lembrete.data
         }
 
         holder.binding.card.setBackgroundColor(setCor(lembrete.prioridade))
