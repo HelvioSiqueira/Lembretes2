@@ -1,4 +1,4 @@
-package com.example.lembretes2
+package com.example.lembretes2.adapter
 
 import android.content.Context
 import android.graphics.Color
@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lembretes2.databinding.ItemLembreteBinding
+import com.example.lembretes2.Lembrete
+import com.example.lembretes2.R
 
 //A classe LembreteAdapter necessita de uma subclasse do tipo RecyclerView.Adapter que deve ser do
 //tipo VH(ViewHolder)
@@ -86,7 +88,7 @@ class LembreteAdapter(ctx: Context) : RecyclerView.Adapter<LembreteAdapter.VH>()
             icone.setImageDrawable(icones.getDrawable(numPrioridade(lembrete.prioridade)))
         }
 
-        holder.itemView.setBackgroundColor(setCor(lembrete.prioridade))
+        holder.binding.card.setBackgroundColor(setCor(lembrete.prioridade))
     }
 
     override fun getItemCount() = lembretes.size
