@@ -1,5 +1,6 @@
 package com.example.lembretes2.di
 
+import com.example.lembretes2.adicionar.LembreteFormViewModel
 import com.example.lembretes2.lista.ListLembretesViewModel
 import com.example.lembretes2.repository.LembreteRepository
 import com.example.lembretes2.repository.room.LembreteDatabase
@@ -16,5 +17,9 @@ val androidModule = module {
 
     viewModel {
         ListLembretesViewModel(repository = get())
+    }
+
+    viewModel {
+        LembreteFormViewModel(repository = get())
     }
 }

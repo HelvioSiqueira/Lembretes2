@@ -1,6 +1,7 @@
 package com.example.lembretes2.lista
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,11 +22,18 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
 
         setupRecycleView()
 
-        viewModel.buscar("").observe(viewLifecycleOwner, Observer { lembretes ->
-            lembreteAdapter.lembretes = lembretes
-        })
+        if(viewModel.getLembretes().value == null){
+            search()
+        }
 
+        viewModel.getLembretes().observe(viewLifecycleOwner, Observer { lembretes->
+            lembreteAdapter.lembretes = lembretes
+
+            Log.d("HSV", lembretes.joinToString(separator = ","))
+        })
     }
+
+
 
     private fun setupRecycleView() = with(binding) {
         rvLembretes.apply {
@@ -40,6 +48,9 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
     ): ListLembretesFragmentBinding =
         ListLembretesFragmentBinding.inflate(inflater, container, false)
 
+    fun search(term: String = ""){
+        viewModel.search(term)
+    }
 
     companion object {
         const val TAG_LISTA = "tagLista"

@@ -8,10 +8,16 @@ class RoomRepository(database: LembreteDatabase): LembreteRepository {
 
     private val lembreteDao = database.lembreteDao()
 
+    private var pos = 1L
+
     override fun save(lembrete: Lembrete) {
         if(lembrete.id == 0L){
             val id = lembreteDao.insert(lembrete)
             lembrete.id = id
+        }
+
+        if(lembrete.position == 0L){
+            lembrete.position = pos++
         }
     }
 
