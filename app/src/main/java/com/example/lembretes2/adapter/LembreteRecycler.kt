@@ -113,5 +113,4 @@ class LembreteAdapter(ctx: Context) : RecyclerView.Adapter<LembreteAdapter.VH>()
         }
         return ic
     }
-
 }

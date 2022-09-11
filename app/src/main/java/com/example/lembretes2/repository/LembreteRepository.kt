@@ -1,8 +1,11 @@
 package com.example.lembretes2.repository
 
+import androidx.lifecycle.LiveData
 import com.example.lembretes2.Lembrete
 
 interface LembreteRepository {
     fun save(lembrete: Lembrete)
-    fun search(term: String, callback: (List<Lembrete>) -> Unit)
+    fun remove(lembrete: Lembrete)
+    fun lembreteByTitle(title: String): LiveData<Lembrete>
+    fun search(term: String): LiveData<List<Lembrete>>
 }

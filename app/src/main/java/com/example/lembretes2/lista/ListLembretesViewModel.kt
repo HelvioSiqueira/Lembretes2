@@ -1,5 +1,6 @@
 package com.example.lembretes2.lista
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.lembretes2.Lembrete
 import com.example.lembretes2.repository.LembreteRepository
@@ -10,14 +11,10 @@ class ListLembretesViewModel(private val repository: LembreteRepository) : ViewM
         repository.save(lembrete)
     }
 
-    fun buscar(term: String): List<Lembrete> {
+    fun buscar(term: String): LiveData<List<Lembrete>> {
 
         var lista: List<Lembrete> = emptyList()
 
-        repository.search(term){
-            lista = it
-        }
-
-        return lista
+        return repository.search(term)
     }
 }

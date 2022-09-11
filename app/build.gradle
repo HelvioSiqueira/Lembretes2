@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -37,6 +38,8 @@ android {
 
 dependencies {
 
+    implementation "androidx.room:room-runtime:2.4.3"
+    kapt "androidx.room:room-compiler:2.4.3"
     implementation 'androidx.fragment:fragment-ktx:1.5.2'
     implementation 'androidx.lifecycle:lifecycle-livedata:2.5.1'
     implementation 'io.insert-koin:koin-android:3.2.0'
