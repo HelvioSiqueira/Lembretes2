@@ -6,11 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.lembretes2.BaseFragment
 import com.example.lembretes2.adapter.LembreteAdapter
 import com.example.lembretes2.databinding.ListLembretesFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
 
@@ -21,19 +24,20 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecycleView()
+        initSwipeGesture()
 
-        if(viewModel.getLembretes().value == null){
+        Log.d("HSV", lembreteAdapter.lembretes.joinToString(separator = ","))
+
+        if (viewModel.getLembretes().value == null) {
             search()
         }
 
-        viewModel.getLembretes().observe(viewLifecycleOwner, Observer { lembretes->
+        viewModel.getLembretes().observe(viewLifecycleOwner, Observer { lembretes ->
             lembreteAdapter.lembretes = lembretes
 
             Log.d("HSV", lembretes.joinToString(separator = ","))
         })
     }
-
-
 
     private fun setupRecycleView() = with(binding) {
         rvLembretes.apply {
@@ -42,13 +46,44 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
         }
     }
 
+    private fun initSwipeGesture() {
+        val swipe = object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT
+        ) {
+
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+
+                val from: Int = viewHolder.absoluteAdapterPosition
+                val to: Int = target.absoluteAdapterPosition
+
+                Log.d("HSV", lembreteAdapter.lembretes[to].toString())
+
+                //Collections.swap(lembreteAdapter.lembretes, from, to)
+                lembreteAdapter.notifyItemMoved(from, to)
+
+                return true
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                TODO("Not yet implemented")
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(swipe)
+        itemTouchHelper.attachToRecyclerView(binding.rvLembretes)
+    }
+
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
     ): ListLembretesFragmentBinding =
         ListLembretesFragmentBinding.inflate(inflater, container, false)
 
-    fun search(term: String = ""){
+    fun search(term: String = "") {
         viewModel.search(term)
     }
 

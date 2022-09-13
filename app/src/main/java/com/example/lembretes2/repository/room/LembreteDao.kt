@@ -4,6 +4,7 @@ package com.example.lembretes2.repository.room
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.lembretes2.Lembrete
+import com.example.lembretes2.repository.COLUMN_POSITION
 import com.example.lembretes2.repository.COLUMN_TITULO
 import com.example.lembretes2.repository.TABLE_LEMBRETE
 
@@ -22,6 +23,6 @@ interface LembreteDao {
     @Query("SELECT * FROM $TABLE_LEMBRETE WHERE $COLUMN_TITULO = :title")
     fun lembreteByTitle(title: String): LiveData<Lembrete>
 
-    @Query("SELECT * FROM $TABLE_LEMBRETE WHERE $COLUMN_TITULO LIKE :query")
+    @Query("SELECT * FROM $TABLE_LEMBRETE WHERE $COLUMN_TITULO LIKE :query ORDER BY $COLUMN_POSITION")
     fun search(query: String): LiveData<List<Lembrete>>
 }
