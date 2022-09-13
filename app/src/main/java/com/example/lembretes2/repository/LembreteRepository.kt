@@ -8,4 +8,5 @@ interface LembreteRepository {
     fun remove(lembrete: Lembrete)
     fun lembreteByTitle(title: String): LiveData<Lembrete>
     fun search(term: String): LiveData<List<Lembrete>>
+    fun quant() : Int
 }

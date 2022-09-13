@@ -20,4 +20,8 @@ class ListLembretesViewModel(private val repository: LembreteRepository) : ViewM
     fun search(term: String = ""){
         searchTerm.value = term
     }
+
+    fun delete(lembrete: Lembrete){
+        repository.remove(lembrete)
+    }
 }

@@ -25,4 +25,7 @@ interface LembreteDao {
 
     @Query("SELECT * FROM $TABLE_LEMBRETE WHERE $COLUMN_TITULO LIKE :query ORDER BY $COLUMN_POSITION")
     fun search(query: String): LiveData<List<Lembrete>>
+
+    @Query("SELECT COUNT(*) FROM $TABLE_LEMBRETE")
+    fun quant(): Int
 }

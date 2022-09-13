@@ -10,12 +10,14 @@ import androidx.fragment.app.FragmentManager
 import com.example.lembretes2.databinding.FragmentLembreteFormBinding
 import android.view.inputmethod.EditorInfo
 import com.example.lembretes2.Lembrete
+import com.example.lembretes2.adapter.LembreteAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LembreteFormFragment : DialogFragment() {
     private lateinit var binding: FragmentLembreteFormBinding
 
     private val viewModel: LembreteFormViewModel by viewModel()
+    private val lembreteAdapter by lazy { LembreteAdapter(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,6 +68,7 @@ class LembreteFormFragment : DialogFragment() {
         lembrete.titulo = binding.edtTitle.text.toString()
         lembrete.texto = binding.edtText.text.toString()
         lembrete.prioridade = binding.spnPrioridades.selectedItem.toString()
+        lembrete.position = lembreteAdapter.lembretes.size.toLong()
 
         return lembrete
     }

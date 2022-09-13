@@ -13,7 +13,6 @@ import com.example.lembretes2.BaseFragment
 import com.example.lembretes2.adapter.LembreteAdapter
 import com.example.lembretes2.databinding.ListLembretesFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
 
@@ -25,8 +24,6 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
 
         setupRecycleView()
         initSwipeGesture()
-
-        Log.d("HSV", lembreteAdapter.lembretes.joinToString(separator = ","))
 
         if (viewModel.getLembretes().value == null) {
             search()
@@ -69,7 +66,11 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                TODO("Not yet implemented")
+                val position = viewHolder.absoluteAdapterPosition
+
+                viewModel.delete(lembreteAdapter.lembretes[position])
+
+                lembreteAdapter.notifyItemRemoved(position)
             }
         }
 
