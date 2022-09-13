@@ -14,6 +14,14 @@ import com.example.lembretes2.adapter.LembreteAdapter
 import com.example.lembretes2.databinding.ListLembretesFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+//---------------------------------------------------------------------
+//---------------------------------------------------------------------
+//---------------------------------------------------------------------
+//Continuar implementação do swipe (move)
+//---------------------------------------------------------------------
+//---------------------------------------------------------------------
+//---------------------------------------------------------------------
+
 class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
 
     private val viewModel: ListLembretesViewModel by viewModel()
@@ -25,16 +33,20 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
         setupRecycleView()
         initSwipeGesture()
 
+        obterLembretes()
+    }
+
+    private fun obterLembretes()
+    {
         if (viewModel.getLembretes().value == null) {
             search()
         }
 
         viewModel.getLembretes().observe(viewLifecycleOwner, Observer { lembretes ->
             lembreteAdapter.lembretes = lembretes
-
-            Log.d("HSV", lembretes.joinToString(separator = ","))
         })
     }
+
 
     private fun setupRecycleView() = with(binding) {
         rvLembretes.apply {
@@ -57,8 +69,6 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
                 val from: Int = viewHolder.absoluteAdapterPosition
                 val to: Int = target.absoluteAdapterPosition
 
-                Log.d("HSV", lembreteAdapter.lembretes[to].toString())
-
                 //Collections.swap(lembreteAdapter.lembretes, from, to)
                 lembreteAdapter.notifyItemMoved(from, to)
 
@@ -69,8 +79,6 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
                 val position = viewHolder.absoluteAdapterPosition
 
                 viewModel.delete(lembreteAdapter.lembretes[position])
-
-                lembreteAdapter.notifyItemRemoved(position)
             }
         }
 
