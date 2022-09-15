@@ -53,7 +53,6 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
         })
     }
 
-
     private fun setupRecycleView() = with(binding) {
         rvLembretes.apply {
             adapter = lembreteAdapter
@@ -84,7 +83,7 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
                 Collections.swap(listaLembretes, from, to)
                 lembreteAdapter.notifyItemMoved(from, to)
 
-                Log.d("HSV", listaLembretes.joinToString(separator = ", "))
+                //Log.d("HSV", listaLembretes.joinToString(separator = ", "))
 
                 return true
             }
@@ -114,6 +113,10 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
 
     fun search(term: String = "") {
         viewModel.search(term)
+    }
+
+    fun clearSearch(){
+        viewModel.search("")
     }
 
     companion object {

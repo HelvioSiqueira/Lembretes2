@@ -10,6 +10,7 @@
 
     <string name="hint_title">Título</string>
     <string name="hint_text">Texto</string>
+    <string name="hint_search">Perquisa</string>
 
     <string name="descricao_btn_seta">Botão para expandir lembrete</string>
 
