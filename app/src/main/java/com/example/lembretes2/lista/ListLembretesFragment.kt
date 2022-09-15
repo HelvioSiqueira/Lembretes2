@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lembretes2.BaseFragment
 import com.example.lembretes2.Lembrete
+import com.example.lembretes2.R
 import com.example.lembretes2.adapter.LembreteAdapter
 import com.example.lembretes2.databinding.ListLembretesFragmentBinding
+import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -30,7 +32,7 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
     private val lembreteAdapter by lazy { LembreteAdapter(requireContext()) }
 
     //Uma lista para ser manipulada a posição dos lembrete
-    private var listaLembretes = listOf<Lembrete>()
+    private var listaLembretes = mutableListOf<Lembrete>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,15 +43,14 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
         obterLembretes()
     }
 
-    private fun obterLembretes()
-    {
+    private fun obterLembretes() {
         if (viewModel.getLembretes().value == null) {
             search()
         }
 
         viewModel.getLembretes().observe(viewLifecycleOwner, Observer { lembretes ->
             lembreteAdapter.lembretes = lembretes
-            listaLembretes = lembretes
+            listaLembretes = lembretes.toMutableList()
         })
     }
 
@@ -83,8 +84,6 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
                 Collections.swap(listaLembretes, from, to)
                 lembreteAdapter.notifyItemMoved(from, to)
 
-                //Log.d("HSV", listaLembretes.joinToString(separator = ", "))
-
                 return true
             }
 
@@ -92,11 +91,23 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
                 val position = viewHolder.absoluteAdapterPosition
 
                 viewModel.delete(lembreteAdapter.lembretes[position])
+                listaLembretes.remove(lembreteAdapter.lembretes[position])
+                showMessageLembreteDeleted()
             }
         }
 
         val itemTouchHelper = ItemTouchHelper(swipe)
         itemTouchHelper.attachToRecyclerView(binding.rvLembretes)
+    }
+
+    private fun showMessageLembreteDeleted() {
+        Snackbar.make(
+            requireView(),
+            getString(R.string.message_lembrete_deleted),
+            Snackbar.LENGTH_LONG
+        ).setAction(R.string.undo) {
+            viewModel.undoDelete()
+        }.show()
     }
 
     //Quando atualiza a posição dos lembretes no banco de dados quando ele entrar em onStop
@@ -115,7 +126,7 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
         viewModel.search(term)
     }
 
-    fun clearSearch(){
+    fun clearSearch() {
         viewModel.search("")
     }
 
