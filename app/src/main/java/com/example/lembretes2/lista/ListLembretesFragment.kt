@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lembretes2.BaseFragment
+import com.example.lembretes2.Lembrete
 import com.example.lembretes2.adapter.LembreteAdapter
 import com.example.lembretes2.databinding.ListLembretesFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -28,6 +29,9 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
     private val viewModel: ListLembretesViewModel by viewModel()
     private val lembreteAdapter by lazy { LembreteAdapter(requireContext()) }
 
+    //Uma lista para ser manipulada a posição dos lembrete
+    private var listaLembretes = listOf<Lembrete>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -45,6 +49,7 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
 
         viewModel.getLembretes().observe(viewLifecycleOwner, Observer { lembretes ->
             lembreteAdapter.lembretes = lembretes
+            listaLembretes = lembretes
         })
     }
 
@@ -70,28 +75,16 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
                 val from: Int = viewHolder.absoluteAdapterPosition
                 val to: Int = target.absoluteAdapterPosition
 
-                //Lembrete clicado que sera movido na lista
-                val lembreteTrocado = lembreteAdapter.lembretes[from]
+                //Manipulando a posição dos lembrete
+                val posAlgo = listaLembretes[to].position
 
-                //Lembrete que será substituido pelo lembrete a ser movido
-                val lembreteAlvo = lembreteAdapter.lembretes[to]
+                listaLembretes[to].position = listaLembretes[from].position
+                listaLembretes[from].position = posAlgo
 
-                //Posição do lembrete substituido para ser usado para atualizado
-                val posAlvo = lembreteTrocado.position
-
-                //Substitui a posição do lembrete
-                lembreteTrocado.position = lembreteAlvo.position
-                lembreteAlvo.position = posAlvo
-
-                viewModel.move(lembreteTrocado)
-                viewModel.move(lembreteAlvo)
-
-                Log.d("HSV", "${lembreteAdapter.lembretes[from]}, $from")
-
-
-
-                //Collections.swap(lembreteAdapter.lembretes, from, to)
+                Collections.swap(listaLembretes, from, to)
                 lembreteAdapter.notifyItemMoved(from, to)
+
+                Log.d("HSV", listaLembretes.joinToString(separator = ", "))
 
                 return true
             }
@@ -105,6 +98,12 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
 
         val itemTouchHelper = ItemTouchHelper(swipe)
         itemTouchHelper.attachToRecyclerView(binding.rvLembretes)
+    }
+
+    //Quando atualiza a posição dos lembretes no banco de dados quando ele entrar em onStop
+    override fun onStop() {
+        super.onStop()
+        viewModel.move(*listaLembretes.toTypedArray())
     }
 
     override fun getViewBinding(

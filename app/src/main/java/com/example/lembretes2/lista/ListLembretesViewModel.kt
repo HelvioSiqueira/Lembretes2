@@ -25,8 +25,10 @@ class ListLembretesViewModel(private val repository: LembreteRepository) : ViewM
         repository.remove(lembrete)
     }
 
-    fun move(lembrete: Lembrete){
-        repository.save(lembrete)
+    fun move(vararg lembretes: Lembrete){
+        lembretes.forEach {
+            repository.save(it)
+        }
     }
 
 }
