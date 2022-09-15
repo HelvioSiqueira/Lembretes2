@@ -16,8 +16,12 @@ class RoomRepository(database: LembreteDatabase): LembreteRepository {
 
             val id = lembreteDao.insert(lembrete)
             lembrete.id = id
+        } else {
+            lembreteDao.update(lembrete)
         }
     }
+
+
 
     override fun remove(lembrete: Lembrete) {
         lembreteDao.delete(lembrete)

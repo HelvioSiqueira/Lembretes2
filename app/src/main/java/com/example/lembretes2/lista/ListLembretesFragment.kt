@@ -13,6 +13,7 @@ import com.example.lembretes2.BaseFragment
 import com.example.lembretes2.adapter.LembreteAdapter
 import com.example.lembretes2.databinding.ListLembretesFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
@@ -68,6 +69,26 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
 
                 val from: Int = viewHolder.absoluteAdapterPosition
                 val to: Int = target.absoluteAdapterPosition
+
+                //Lembrete clicado que sera movido na lista
+                val lembreteTrocado = lembreteAdapter.lembretes[from]
+
+                //Lembrete que será substituido pelo lembrete a ser movido
+                val lembreteAlvo = lembreteAdapter.lembretes[to]
+
+                //Posição do lembrete substituido para ser usado para atualizado
+                val posAlvo = lembreteTrocado.position
+
+                //Substitui a posição do lembrete
+                lembreteTrocado.position = lembreteAlvo.position
+                lembreteAlvo.position = posAlvo
+
+                viewModel.move(lembreteTrocado)
+                viewModel.move(lembreteAlvo)
+
+                Log.d("HSV", "${lembreteAdapter.lembretes[from]}, $from")
+
+
 
                 //Collections.swap(lembreteAdapter.lembretes, from, to)
                 lembreteAdapter.notifyItemMoved(from, to)

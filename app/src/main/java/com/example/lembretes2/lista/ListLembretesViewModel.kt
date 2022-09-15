@@ -24,4 +24,9 @@ class ListLembretesViewModel(private val repository: LembreteRepository) : ViewM
     fun delete(lembrete: Lembrete){
         repository.remove(lembrete)
     }
+
+    fun move(lembrete: Lembrete){
+        repository.save(lembrete)
+    }
+
 }
