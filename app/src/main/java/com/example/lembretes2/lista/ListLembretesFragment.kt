@@ -81,6 +81,8 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
                 listaLembretes[to].position = listaLembretes[from].position
                 listaLembretes[from].position = posAlgo
 
+                //Log.d("HSV", "${listaLembretes[from]} | ${listaLembretes[to]}")
+
                 Collections.swap(listaLembretes, from, to)
                 lembreteAdapter.notifyItemMoved(from, to)
 
