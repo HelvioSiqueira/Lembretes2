@@ -19,7 +19,7 @@ import com.example.lembretes2.R
 //tipo VH(ViewHolder)
 
 //Uso o ctx para poder ter acesso aos arquivo de layout array
-class LembreteAdapter(ctx: Context) : RecyclerView.Adapter<LembreteAdapter.VH>() {
+class LembreteAdapter(ctx: Context, listaLembrete: List<Lembrete> = listOf()) : RecyclerView.Adapter<LembreteAdapter.VH>() {
 
     inner class VH(val binding: ItemLembreteBinding) :
         RecyclerView.ViewHolder(binding.root)

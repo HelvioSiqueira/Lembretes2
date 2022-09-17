@@ -15,8 +15,13 @@ import com.example.lembretes2.R
 import com.example.lembretes2.adapter.LembreteAdapter
 import com.example.lembretes2.databinding.ListLembretesFragmentBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
+import kotlin.coroutines.CoroutineContext
 
 //---------------------------------------------------------------------
 //---------------------------------------------------------------------
@@ -41,6 +46,13 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
         initSwipeGesture()
 
         obterLembretes()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+
+        Log.d("HSV", "Resume: ${listaLembretes.joinToString(separator = "----")}")
     }
 
     private fun obterLembretes() {
@@ -76,12 +88,12 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
                 val to: Int = target.absoluteAdapterPosition
 
                 //Manipulando a posição dos lembrete
-                val posAlgo = listaLembretes[to].position
+                val posAlvo = listaLembretes[to].position
 
                 listaLembretes[to].position = listaLembretes[from].position
-                listaLembretes[from].position = posAlgo
+                listaLembretes[from].position = posAlvo
 
-                //Log.d("HSV", "${listaLembretes[from]} | ${listaLembretes[to]}")
+                Log.d("HSV", "Posição: ${listaLembretes[from].position}")
 
                 Collections.swap(listaLembretes, from, to)
                 lembreteAdapter.notifyItemMoved(from, to)
@@ -115,7 +127,10 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
     //Quando atualiza a posição dos lembretes no banco de dados quando ele entrar em onStop
     override fun onStop() {
         super.onStop()
+
+        Log.d("HSV", "Pausado: ${listaLembretes.joinToString(separator = "----")}")
         viewModel.move(*listaLembretes.toTypedArray())
+        setupRecycleView()
     }
 
     override fun getViewBinding(

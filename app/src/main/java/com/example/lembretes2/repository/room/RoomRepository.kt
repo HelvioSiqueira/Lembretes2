@@ -1,6 +1,5 @@
 package com.example.lembretes2.repository.room
 
-
 import androidx.lifecycle.LiveData
 import com.example.lembretes2.Lembrete
 import com.example.lembretes2.repository.LembreteRepository
@@ -11,7 +10,6 @@ class RoomRepository(database: LembreteDatabase): LembreteRepository {
 
     override fun save(lembrete: Lembrete) {
         if(lembrete.id == 0L){
-
             lembrete.position = lembreteDao.quant().toLong() + 1
 
             val id = lembreteDao.insert(lembrete)
@@ -20,8 +18,6 @@ class RoomRepository(database: LembreteDatabase): LembreteRepository {
             lembreteDao.update(lembrete)
         }
     }
-
-
 
     override fun remove(lembrete: Lembrete) {
         lembreteDao.delete(lembrete)
