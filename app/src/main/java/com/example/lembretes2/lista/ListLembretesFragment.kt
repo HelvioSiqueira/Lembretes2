@@ -98,6 +98,8 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
                 Collections.swap(listaLembretes, from, to)
                 lembreteAdapter.notifyItemMoved(from, to)
 
+                lembreteAdapter.lembretes = listaLembretes
+
                 return true
             }
 
@@ -130,7 +132,7 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
 
         Log.d("HSV", "Pausado: ${listaLembretes.joinToString(separator = "----")}")
         viewModel.move(*listaLembretes.toTypedArray())
-        setupRecycleView()
+        //setupRecycleView()
     }
 
     override fun getViewBinding(
