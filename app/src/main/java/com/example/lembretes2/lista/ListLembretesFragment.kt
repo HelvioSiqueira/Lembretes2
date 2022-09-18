@@ -98,7 +98,7 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
                 Collections.swap(listaLembretes, from, to)
                 lembreteAdapter.notifyItemMoved(from, to)
 
-                //Faltava atualizar a lista de lembretes do adapter
+                //Faltava atualizar a lista de lembretes do adapterdfsdf
                 lembreteAdapter.lembretes = listaLembretes
 
                 return true
