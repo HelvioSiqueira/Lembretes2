@@ -1,6 +1,8 @@
 package com.example.lembretes2.di
 
 import com.example.lembretes2.adicionar.LembreteFormViewModel
+import com.example.lembretes2.auth.Auth
+import com.example.lembretes2.auth.AuthMananger
 import com.example.lembretes2.lista.ListLembretesViewModel
 import com.example.lembretes2.repository.LembreteRepository
 import com.example.lembretes2.repository.room.LembreteDatabase
@@ -21,5 +23,14 @@ val androidModule = module {
 
     viewModel {
         LembreteFormViewModel(repository = get())
+    }
+
+    single {
+        val manager: AuthMananger = get()
+        manager as Auth
+    }
+
+    single {
+        AuthMananger(context = get())
     }
 }

@@ -1,6 +1,5 @@
 package com.example.lembretes2.repository.room
 
-
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.lembretes2.Lembrete

@@ -38,6 +38,9 @@ android {
 
 dependencies {
 
+    implementation 'com.google.android.gms:play-services-auth:20.3.0'
+    implementation platform('com.google.firebase:firebase-bom:30.5.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation "androidx.room:room-runtime:2.4.3"
     kapt "androidx.room:room-compiler:2.4.3"
     implementation 'androidx.fragment:fragment-ktx:1.5.2'

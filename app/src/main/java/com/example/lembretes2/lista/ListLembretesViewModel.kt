@@ -1,6 +1,5 @@
 package com.example.lembretes2.lista
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -35,9 +34,7 @@ class ListLembretesViewModel(private val repository: LembreteRepository) : ViewM
     }
 
     fun undoDelete() {
-        Log.d("HSV", deletedItem.toString())
         deletedItem.id = 0
         repository.save(deletedItem)
     }
-
 }

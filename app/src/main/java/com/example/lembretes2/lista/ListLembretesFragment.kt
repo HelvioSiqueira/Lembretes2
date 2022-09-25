@@ -48,13 +48,6 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
         obterLembretes()
     }
 
-    override fun onResume() {
-        super.onResume()
-
-
-        Log.d("HSV", "Resume: ${listaLembretes.joinToString(separator = "----")}")
-    }
-
     private fun obterLembretes() {
         if (viewModel.getLembretes().value == null) {
             search()
@@ -131,9 +124,7 @@ class ListLembretesFragment : BaseFragment<ListLembretesFragmentBinding>() {
     override fun onStop() {
         super.onStop()
 
-        Log.d("HSV", "Pausado: ${listaLembretes.joinToString(separator = "----")}")
-        viewModel.move(*listaLembretes.toTypedArray())
-        //setupRecycleView()
+        viewModel.move(*lembreteAdapter.lembretes.toTypedArray())
     }
 
     override fun getViewBinding(

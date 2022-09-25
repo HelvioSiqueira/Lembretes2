@@ -49,4 +49,7 @@
     <string name="title_cor_urgente">Mudar cor da prioridade urgente</string>
 
     <string name="title_cat1">Cat 1</string>
+
+    <string name="error_login_failed">Falha ao efetuar login</string>
+    <string name="error_play_services_not_supported">Google Play Services não disponivel ou não suportado.</string>
 </resources>

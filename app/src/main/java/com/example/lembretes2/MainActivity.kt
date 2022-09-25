@@ -10,7 +10,7 @@ import com.example.lembretes2.adicionar.LembreteFormFragment
 import com.example.lembretes2.databinding.ActivityMainBinding
 import com.example.lembretes2.lista.ListLembretesFragment
 
-class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener,
+class MainActivity : BaseActivity(), SearchView.OnQueryTextListener,
     MenuItem.OnActionExpandListener {
 
     private lateinit var binding: ActivityMainBinding
