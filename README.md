@@ -4,6 +4,21 @@ O app consiste em uma lista de tarefas com funções(até o momento) de adiciona
 sem dúvida o RecyclerView que adapta lista da forma que queremos e deixa mais fácil implementar funções como mover e excluir com um gesto cada item da lista.
 Vamos ao código:
 
+## Features do App
+
+<ul>
+    <li>Adicionar e excluir lembretes</li>
+    <li>Mover lembretes</li>
+</ul>
+
+## Bibliotecas utilizadas
+
+<ul>
+    <li>RecyclerView</li>
+    <li>Koin</li>
+    <li>Room</li>
+</ul>
+
 ## RecyclerView
 
 A classe RecycleView(arquivo LembreteAdapter) obrigatoriamente tem que ter 3 métodos ```onCreateViewHolder()```, ```onBindViewHolder()``` e o ```getItemCount()```
