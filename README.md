@@ -1,8 +1,6 @@
-# App de Lembretes usando RecyclerView
-
-O app consiste em uma lista de tarefas com funções(até o momento) de adicionar, mover e excluir as tarefas. Nele a parte mais importante do código é
-sem dúvida o RecyclerView que adapta lista da forma que queremos e deixa mais fácil implementar funções como mover e excluir com um gesto cada item da lista.
-Vamos ao código:
+<div align="center">
+    <h1>App de Lembretes usando RecyclerView</h1>
+</div>
 
 ## Features do App
 
@@ -18,6 +16,8 @@ Vamos ao código:
     <li>Koin</li>
     <li>Room</li>
 </ul>
+
+# Vamos ao código:
 
 ## RecyclerView
 
